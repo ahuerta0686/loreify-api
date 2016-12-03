@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-sm-4">
+    <h3>Add Story</h3>
+    <form [formGroup]="addStoryForm" (ngSubmit)="addStory()">
+      <label>Title</label>
+      <input type="text" formControlName="title" class="form-control">
+      <button type="submit" class="btn btn-primary">Add Story</button>
+    </form>
+  </div>
+  <div class="col-sm-4">
+    <h3>Stories</h3>
+    <ul>
+      <li *ngFor="let story of stories | async">{{story.title}} <button (click)="selectStory(story)" class="btn btn-default">Select</button></li>
+    </ul>
+  </div>
+  <div class="col-sm-4">
+    <h3>Current Story</h3>
+    <div *ngIf="currentStory">
+      <h4>{{currentStory.title}}</h4>
+      <ul>
+        <li *ngFor="let blurb of currentBlurbs | async">{{blurb.input}}: {{blurb.generated}}</li>
+      </ul>
+      <form [formGroup]="addBlurbForm" (ngSubmit)="addBlurb()">
+        <label>Input</label>
+        <input type="text" formControlName="input" class="form-control">
+        <label>Genre</label>
+        <input type="text" formControlName="genre" class="form-control">
+        <button type="submit" class="btn btn-primary">Add Blurb</button>
+      </form>
+    </div>
+  </div>
+</div>
